@@ -24,7 +24,7 @@ jobs:
         run: ./.venv/bin/pip install -r requirements.txt
 
       - name: Update TF1
-        run: ./.venv/bin/python auth_links/tf1.py ${{ secrets.TF1_EMAIL }} ${{ secrets.TF1_PASSWORD }}
+        run: ./.venv/bin/python auth_links/tf1.py "${{ secrets.TF1_EMAIL }}" "${{ secrets.TF1_PASSWORD }}"
 
       - name: Add, commit & push
         run: |
