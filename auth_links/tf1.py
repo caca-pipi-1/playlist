@@ -12,6 +12,4 @@ options = Options({
 session = Streamlink(options)
 streams = session.streams("https://www.tf1.fr/tf1/direct")
 
-print(streams)
-
 print(streams["best"].url)
