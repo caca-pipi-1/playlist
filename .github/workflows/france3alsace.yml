@@ -1,0 +1,33 @@
+name: France 3 Alsace
+
+on:
+#  schedule:
+#    - cron: '0 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Git
+        run: |
+          git config user.email "${{ secrets.GIT_EMAIL }}"
+          git config user.name "${{ secrets.GIT_USERNAME }}"
+
+      - name: Create virtual environment
+        run: python -m venv .venv
+      
+      - name: Install dependencies
+        run: ./.venv/bin/pip install -r requirements.txt
+
+      - name: Update TF1
+        run: ./.venv/bin/python auth_links/france3alsace
+
+      - name: Add, commit & push
+        run: |
+          git pull origin main
+          git commit -am "Update TF1"
+          git push origin main
