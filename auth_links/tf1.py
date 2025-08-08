@@ -1,7 +1,7 @@
 from streamlink import Streamlink
 from streamlink.options import Options
-
 import sys
+import utilities
 
 options = Options({
     "email": sys.argv[1],
@@ -9,7 +9,9 @@ options = Options({
     "purge-credentials": True
 })
 
-session = Streamlink(options)
-streams = session.streams("https://www.tf1.fr/tf1/direct")
+session = Streamlink()
+stream = session.streams("https://www.tf1.fr/tf1/direct", options)["best"].url
 
-print(streams["best"].url)
+utilities.replace_url("TF1", stream)
+
+print(stream)
